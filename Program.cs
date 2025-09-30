@@ -1,4 +1,171 @@
-﻿// QUESTÃO 1 – MÉDIA DE NOTAS
+﻿//QUESTAO 1
+
+
+/*
+Console.WriteLine("Digite seu nome: ");
+string nome = Console.ReadLine();
+
+int idade = 0;
+bool idadeValida = false;
+
+while (!idadeValida) {
+    Console.WriteLine("digite sua idade: ");
+    string entrada = Console.ReadLine();
+
+try {
+    idade=int.Parse(entrada);
+    idadeValida=true;
+}
+catch (OverflowException)
+{
+    Console.WriteLine("Valor invalido, digite novamente.");
+}
+Console.WriteLine(idade, nome);
+Console.ReadLine();
+}
+*/
+
+
+//QUESTAO 2
+
+
+
+/*
+Console.WriteLine("Digite o primeiro numero: ");
+int n1=int.Parse(Console.ReadLine());
+
+Console.WriteLine("Digite o primeiro numero: ");
+int n2 =int.Parse(Console.ReadLine());
+
+int soma = n1 + n2;
+Console.WriteLine($"A soma do {n1} + {n2} = {soma}");
+Console.ReadLine();
+*/
+
+// QUESTAO 3
+/*
+Console.WriteLine("digite a sua idade: ");
+int idade = int.Parse(Console.ReadLine());
+
+if (idade >= 18)
+    Console.WriteLine("voce e maior de idade.");
+
+else
+    Console.WriteLine("voce e menor de idade.");
+*/
+
+
+
+// QUESTÃO 4
+
+
+/*
+for (int i=0;i<=10;i++)//INICIACAO DO CINTADOR)
+{
+    Console.WriteLine(i);
+}
+*/
+
+/*
+int i = 0;
+while (i <= 10)
+{
+    Console.WriteLine(i);
+    i++;
+}
+*/
+
+
+
+// QUESTÃO 5
+/*
+Console.WriteLine("Digite um número: ");
+int n1 = int.Parse(Console.ReadLine());
+
+// Usando o laço for para mostrar a tabuada de 1 a 10
+Console.WriteLine($"Tabuada de {n1}:");
+for (int i = 1; i <= 10; i++)
+{
+    Console.WriteLine($"{n1} x {i} = {n1 * i}");
+}
+*/
+
+
+
+
+// QUESTÃO 6
+/*
+Console.WriteLine("Digite a senha: ");
+string senha = Console.ReadLine();
+
+if (senha == "1234")
+    Console.WriteLine("Senha correta.");
+else
+    Console.WriteLine("Senha incorreta.");
+*/
+
+
+string senha = "";
+while (senha != "1234")
+{
+    Console.WriteLine("Digite a senha: ");
+    senha = Console.ReadLine();
+
+    if (senha == "1234")
+    {
+        Console.WriteLine("Acesso permitido.");
+    }
+    else
+    {
+        Console.WriteLine("Senha incorreta. Tente novamente.");
+    }
+}
+
+
+
+
+// QUESTÃO 7
+/*
+
+
+// Inicializando o maior número com o menor valor possível de int
+int maior = int.MinValue;
+
+for (int i = 1; i <= 5; i++)
+{
+    Console.WriteLine($"Digite o {i}º número:");
+    int numero = int.Parse(Console.ReadLine());
+
+    // Verifica se o número digitado é maior que o valor atual de 'maior'
+    if (numero > maior)
+        maior = numero;  // Se for maior, atualiza 'maior'
+}
+
+// Exibe o maior número encontrado
+Console.WriteLine($"O maior número digitado foi: {maior}");
+
+*/
+
+
+
+
+// QUESTÃO 8
+/*
+Console.WriteLine("Números pares de 1 até 50:");
+
+for (int i = 1; i <= 50; i++)
+{
+    if (i % 2 == 0)  // Verifica se o número 'i' é par (resto da divisão por 2 é 0)
+    {
+        Console.WriteLine(i);  
+    }
+}
+*/
+
+
+
+
+// QUESTÃO 9
 /*
 Console.WriteLine("Digite a primeira nota:");
 double nota1 = double.Parse(Console.ReadLine());
@@ -6,97 +173,61 @@ double nota1 = double.Parse(Console.ReadLine());
 Console.WriteLine("Digite a segunda nota:");
 double nota2 = double.Parse(Console.ReadLine());
 
-double media = (nota1 + nota2) / 2;
+Console.WriteLine("Digite a terceira nota:");
+double nota3 = double.Parse(Console.ReadLine());
 
+// Calculando a média das 3 notas
+double media = (nota1 + nota2 + nota3) / 3;
+
+// Verificando se o aluno está aprovado ou reprovado
 if (media >= 6)
 {
-    Console.WriteLine("Aprovado! Média = " + media);
+    Console.WriteLine($"Média: {media:F2}. O aluno está APROVADO.");
 }
 else
 {
-    Console.WriteLine("Reprovado! Média = " + media);
+    Console.WriteLine($"Média: {media:F2}. O aluno está REPROVADO.");
 }
 */
 
 
-// QUESTÃO 2 – CONTROLE DE ESTOQUE
+
+
+
+
+
+// QUESTÃO 10
 /*
-Console.WriteLine("Quantidade atual em estoque:");
-int atual = int.Parse(Console.ReadLine());
+Console.WriteLine("Digite o número do dia da semana (1=Domingo, 2=Segunda-feira, ...):");
+int dia = int.Parse(Console.ReadLine());
 
-Console.WriteLine("Quantidade máxima:");
-int maximo = int.Parse(Console.ReadLine());
-
-Console.WriteLine("Quantidade mínima:");
-int minimo = int.Parse(Console.ReadLine());
-
-int media = (maximo + minimo) / 2;
-
-if (atual >= media)
+// Usando o switch para identificar o dia da semana
+switch (dia)
 {
-    Console.WriteLine("Não efetuar compra");
-}
-else
-{
-    Console.WriteLine("Efetuar compra");
-}
-*/
-
-
-// QUESTÃO 3 – FRUTEIRA
-/*
-Console.WriteLine("Kg de morangos:");
-double kgMorango = double.Parse(Console.ReadLine());
-
-Console.WriteLine("Kg de maçãs:");
-double kgMaca = double.Parse(Console.ReadLine());
-
-double precoMorango = (kgMorango <= 5) ? 2.5 : 2.2;
-double precoMaca = (kgMaca <= 5) ? 1.8 : 1.5;
-
-double total = (kgMorango * precoMorango) + (kgMaca * precoMaca);
-double peso = kgMorango + kgMaca;
-
-if (peso > 8 || total > 25)
-{
-    total = total - (total * 0.10);
+    case 1:
+        Console.WriteLine("Domingo");
+        break;
+    case 2:
+        Console.WriteLine("Segunda-feira");
+        break;
+    case 3:
+        Console.WriteLine("Terça-feira");
+        break;
+    case 4:
+        Console.WriteLine("Quarta-feira");
+        break;
+    case 5:
+        Console.WriteLine("Quinta-feira");
+        break;
+    case 6:
+        Console.WriteLine("Sexta-feira");
+        break;
+    case 7:
+        Console.WriteLine("Sábado");
+        break;
+    default:
+        Console.WriteLine("Número inválido! Digite um número entre 1 e 7.");
+        break;
 }
 
-Console.WriteLine("Valor a pagar: R$ " + total);
-*/
 
-
-// QUESTÃO 4 – DESCONTO POR QUANTIDADE
-/*
-Console.WriteLine("Nome do produto:");
-string produto = Console.ReadLine();
-
-Console.WriteLine("Quantidade:");
-int qtd = int.Parse(Console.ReadLine());
-
-Console.WriteLine("Preço unitário:");
-double preco = double.Parse(Console.ReadLine());
-
-double total = qtd * preco;
-double desconto = 0;
-
-if (qtd <= 5)
-{
-    desconto = total * 0.02;
-}
-else if (qtd <= 10)
-{
-    desconto = total * 0.03;
-}
-else
-{
-    desconto = total * 0.05;
-}
-
-double pagar = total - desconto;
-
-Console.WriteLine("Produto: " + produto);
-Console.WriteLine("Total sem desconto: " + total);
-Console.WriteLine("Desconto: " + desconto);
-Console.WriteLine("Total a pagar: " + pagar);
-*/
