@@ -1,81 +1,117 @@
-﻿using System;
+using System;
 
-class UrnaEletronica
+namespace CalculadoraApp
 {
-    static void Main()
+    // Classe responsável pelas operações matemáticas
+    class Calculadora
     {
-        // Variáveis para fazer as contagens das ações
-        int votosMSDN = 0;
-        int votosTechNet = 0;
-        int votosSpokeDotNet = 0;
-        int votosBranco = 0;
-        int votosNulos = 0;
+        // Métodos de operação
+        public double Somar(double a, double b) => a + b;
+        public double Subtrair(double a, double b) => a - b;
+        public double Multiplicar(double a, double b) => a * b;
 
-        // Mostrar data e hora
-        Console.WriteLine("Data e hora atual: " + DateTime.Now);
-
-        // Mostrar a mensagem inicial
-        Console.WriteLine("=================================");
-        Console.WriteLine("VOTE CERTO!");
-        Console.WriteLine("=================================");
-
-        // Loop para continuar recebendo votos 
-        string continuarVotando = "sim";
-        while (continuarVotando.ToLower() == "sim")
+        public double Dividir(double a, double b)
         {
-            // Menu opções de voto
-            Console.WriteLine("\nEscolha uma opção de voto:");
-            Console.WriteLine("1 - MSDN Brasil");
-            Console.WriteLine("2 - TechNet Brasil");
-            Console.WriteLine("3 - The Spoke .Net");
-            Console.WriteLine("4 - Voto em branco");
-            Console.WriteLine("5 - Voto nulo");
-
-            // Solicita que o usuário digite sua opção de voto
-            Console.Write("\nDigite sua opção (1-5): ");
-            string opcao = Console.ReadLine();
-
-            // Registra o voto utilizando a estrutura switch
-            switch (opcao)
-            {
-                case "1":
-                    votosMSDN++;
-                    Console.WriteLine("Voce votou em MSDN Brasil.");
-                    break;
-                case "2":
-                    votosTechNet++;
-                    Console.WriteLine("Voce votou em TechNet Brasil.");
-                    break;
-                case "3":
-                    votosSpokeDotNet++;
-                    Console.WriteLine("Voce votou em The Spoke .Net.");
-                    break;
-                case "4":
-                    votosBranco++;
-                    Console.WriteLine("Voce votou em branco.");
-                    break;
-                case "5":
-                    votosNulos++;
-                    Console.WriteLine("Voce votou nulo.");
-                    break;
-                default:
-                    Console.WriteLine("Opçao invalida! Tente novamente.");
-                    continue;
-            }
-
-            // Pergunta se o usuário deseja continuar votando
-            Console.Write("\nquer continuar votando? (sim/nao): ");
-            continuarVotando = Console.ReadLine();
+            if (b == 0)
+                throw new DivideByZeroException("Não é possível dividir por zero!");
+            return a / b;
         }
 
-        // Exibe o total de votos de cada opção
-        Console.WriteLine("\n=================================");
-        Console.WriteLine("Resultado final da votaçao:");
-        Console.WriteLine($"MSDN Brasil: {votosMSDN} votos");
-        Console.WriteLine($"TechNet Brasil: {votosTechNet} votos");
-        Console.WriteLine($"The Spoke .Net: {votosSpokeDotNet} votos");
-        Console.WriteLine($"Votos em branco: {votosBranco} votos");
-        Console.WriteLine($"Votos nulos: {votosNulos} votos");
-        Console.WriteLine("=================================");
+        public double Potenciar(double a, double b) => Math.Pow(a, b);
+    }
+
+    // Classe principal com a execução do programa
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Calculadora calc = new Calculadora(); // Instanciando a classe Calculadora
+
+            bool continuar = true;
+
+            // Laço de repetição para continuar realizando operações
+            while (continuar)
+            {
+                Console.Clear();
+                Console.WriteLine("Calculadora - Escolha uma operação:");
+                Console.WriteLine("1. Soma");
+                Console.WriteLine("2. Subtração");
+                Console.WriteLine("3. Multiplicação");
+                Console.WriteLine("4. Divisão");
+                Console.WriteLine("5. Potenciação");
+                Console.WriteLine("6. Sair");
+
+                Console.Write("\nEscolha uma opção (1-6): ");
+                int opcao;
+
+                // Tratamento de exceção para entrada inválida
+                try
+                {
+                    opcao = int.Parse(Console.ReadLine());
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Opção inválida! Por favor, insira um número de 1 a 6.");
+                    continue;
+                }
+
+                // Execução da operação selecionada pelo usuário
+                switch (opcao)
+                {
+                    case 1:
+                        RealizarOperacao(calc.Somar);
+                        break;
+                    case 2:
+                        RealizarOperacao(calc.Subtrair);
+                        break;
+                    case 3:
+                        RealizarOperacao(calc.Multiplicar);
+                        break;
+                    case 4:
+                        RealizarOperacao(calc.Dividir);
+                        break;
+                    case 5:
+                        RealizarOperacao(calc.Potenciar);
+                        break;
+                    case 6:
+                        continuar = false;
+                        break;
+                    default:
+                        Console.WriteLine("Opção inválida! Tente novamente.");
+                        break;
+                }
+
+                // Pergunta se o usuário deseja continuar
+                if (continuar)
+                {
+                    Console.WriteLine("\nPressione qualquer tecla para continuar...");
+                    Console.ReadKey();
+                }
+            }
+        }
+
+        // Método que executa a operação e trata erros
+        static void RealizarOperacao(Func<double, double, double> operacao)
+        {
+            try
+            {
+                Console.Write("Digite o primeiro número: ");
+                double num1 = double.Parse(Console.ReadLine());
+
+                Console.Write("Digite o segundo número: ");
+                double num2 = double.Parse(Console.ReadLine());
+
+                double resultado = operacao(num1, num2);
+                Console.WriteLine($"Resultado: {resultado}\n");
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Entrada inválida! Por favor, insira números válidos.");
+            }
+            catch (DivideByZeroException)
+            {
+                Console.WriteLine("Erro! Divisão por zero não é permitida.");
+            }
+        }
     }
 }
